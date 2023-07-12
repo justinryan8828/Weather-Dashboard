@@ -8,7 +8,7 @@ var apiKey = "f3ff5901402986dd4ec3b605204bfe0c";
 function getCoordinates(param) {
   // template literal allows you to write a string while also passing variable
   // DONT FORGET TO ADD HTTPS WHEN DEPLOYING
-  var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${param}&limit=5&appid=${apiKey}`;
+  var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${param}&limit=5&appid=${apiKey}&units=imperial`;
   console.log(apiUrl);
   fetch(apiUrl)
     .then(function (Response) {
@@ -22,16 +22,33 @@ function getCoordinates(param) {
       console.log(data.name, data.weather[0].icon);
 
       var currentTemp = document.querySelector("#currentTemp");
+      var icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
 
-      currentTemp.innerHTML = `<h2>${data.name}</h2><div>${data.weather[0].icon}</div><div>${data.main.temp}</div><div>${data.main.humidity}</div><div>${data.wind.speed}</div>`;
+      currentTemp.innerHTML = `<h2>City: ${data.name}</h2><img src=${icon}></img><div>Tempature: ${data.main.temp}</div><div>Humidty: ${data.main.humidity}</div><div>Wind Speed: ${data.wind.speed} mph</div>`;
 
-      // saving lattitude and longitude
-      //   console.log(data[0].lat);
-      //   console.log(data[0].lon);
-      //   getWeather(data[0].lat, data[0].lon);
+      fiveDay(data.coord.lon, data.coord.lat);
     });
 }
+// 5 day weather, dont forget to style
+function fiveDay(lon, lat) {
+  var apiFiveDay = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
 
+  fetch(apiFiveDay)
+    .then(function (Response) {
+      return Response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+
+      for (var i = 3; i < data.list.length; i += 8) {
+        var icon = `https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`;
+
+        document.getElementById(
+          "forecast"
+        ).innerHTML += `<h2></h2><img src=${icon}></img><div>Tempature: ${data.list[i].main.temp}</div><div>Humidty: ${data.list[i].main.humidity}</div><div>Wind Speed: ${data.list[i].wind.speed} mph</div>`;
+      }
+    });
+}
 // THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
 // WHEN I view future weather conditions for that city
 // THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
