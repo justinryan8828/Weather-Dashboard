@@ -12,7 +12,6 @@ async function getCoordinates(param) {
   // template literal allows you to write a string while also passing variable
   // DONT FORGET TO ADD HTTPS WHEN DEPLOYING
   var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${param}&limit=5&appid=${apiKey}&units=imperial`;
-  console.log(apiUrl);
   await fetch(apiUrl)
     .then(function (Response) {
       // repsponse tells us data on fetch
@@ -20,14 +19,12 @@ async function getCoordinates(param) {
       return Response.json();
     })
     .then(function (data) {
-      console.log(data);
       //the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-      console.log(data.name);
 
       var currentTemp = document.querySelector("#currentTemp");
       var icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
 
-      currentTemp.innerHTML = `<h2>City: ${data.name}</h2><img src=${icon}></img><div>Tempature: ${data.main.temp}</div><div>Humidty: ${data.main.humidity}</div><div>Wind Speed: ${data.wind.speed} mph</div>`;
+      currentTemp.innerHTML = `<h2>${data.name} <br> Current Forecast:</h2><img src=${icon}></img><div>Tempature: ${data.main.temp}</div><div>Humidty: ${data.main.humidity}</div><div>Wind Speed: ${data.wind.speed} mph</div>`;
 
       fiveDay(data.coord.lon, data.coord.lat);
       citySave(data.name);
@@ -42,14 +39,18 @@ async function fiveDay(lon, lat) {
       return Response.json();
     })
     .then(function (data) {
-      console.log(data);
+      // this will clear the existing forecast
+      document.getElementById("forecast").innerHTML = "Five Day Forecast:";
 
       for (var i = 3; i < data.list.length; i += 8) {
         var icon = `https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`;
 
-        document.getElementById(
-          "forecast"
-        ).innerHTML += `<h2></h2><img src=${icon}></img><div>Tempature: ${data.list[i].main.temp}</div><div>Humidty: ${data.list[i].main.humidity}</div><div>Wind Speed: ${data.list[i].wind.speed} mph</div>`;
+        document.getElementById("forecast").innerHTML += `<div class = "card">
+        <img src=${icon} class = "iconClass"></img>
+        <div>Tempature: ${data.list[i].main.temp}</div>
+        <div>Humidty: ${data.list[i].main.humidity}</div>
+        <div>Wind Speed: ${data.list[i].wind.speed} mph</div>
+        </div>`;
       }
     });
 }
@@ -59,14 +60,12 @@ function citySave(city) {
 
   if (cityArray.indexOf(city) !== -1) return;
   cityArray.push(city);
-  console.log(cityArray);
   localStorage.setItem("searchHistory", JSON.stringify(cityArray));
   displayCities();
 }
 
 function displayCities() {
   var historyButton = document.querySelector("#historyButton");
-  console.log(historyButton);
 
   historyButton.innerHTML = "";
   var storedSearchHistory =
@@ -75,6 +74,9 @@ function displayCities() {
     var btn = document.createElement("button");
     btn.textContent = city;
     historyButton.append(btn);
+    btn.addEventListener("click", function () {
+      getCoordinates(city);
+    });
   });
 }
 

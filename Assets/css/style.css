@@ -1,6 +1,98 @@
-#head {
-  display: flex;
-
-  color: antiquewhite;
-  background-color: rgb(72, 72, 234);
+/* Colors */
+:root {
+  --light-blue: #00a0e9;
+  --light-grey: #d3d3d3;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+.container {
+  display: flex;
+}
+
+.head {
+  background-color: var(--light-blue);
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+#citySearch {
+  font-weight: bold;
+  color: var(--light-blue);
+  margin-top: 20px;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#submitButton {
+  background-color: var(--light-blue);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+#historyButton {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+#historyButton button {
+  margin-left: 10px;
+}
+
+#currentTemp {
+  padding: 20px;
+  background-color: var(--light-blue);
+  color: #fff;
+}
+
+#forecast {
+  padding: 20px;
+  background-color: var(--light-grey);
+  color: #fff;
+}
+
+#forecast h2 {
+  margin-top: 0;
+}
+
+#forecast img {
+  display: block;
+  margin-bottom: 10px;
+}
+
+button {
+  margin-bottom: 5px;
+  background-color: var(--light-grey);
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* style icon */
+.iconClass {
+  height: 25px;
+  width: 25px;
+}
+/* style card */
+.card {
+  background-color: var(--light-grey);
+}
+/* create flexbos for forecast */
