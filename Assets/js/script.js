@@ -1,3 +1,4 @@
+let cityArray = [];
 // Input
 var searchCity = document.querySelector("#searchCity");
 // button
@@ -5,12 +6,12 @@ var submitButton = document.querySelector("#submitButton");
 // api Key
 var apiKey = "f3ff5901402986dd4ec3b605204bfe0c";
 
-function getCoordinates(param) {
+async function getCoordinates(param) {
   // template literal allows you to write a string while also passing variable
   // DONT FORGET TO ADD HTTPS WHEN DEPLOYING
   var apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${param}&limit=5&appid=${apiKey}&units=imperial`;
   console.log(apiUrl);
-  fetch(apiUrl)
+  await fetch(apiUrl)
     .then(function (Response) {
       // repsponse tells us data on fetch
 
@@ -19,7 +20,7 @@ function getCoordinates(param) {
     .then(function (data) {
       console.log(data);
       //the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-      console.log(data.name, data.weather[0].icon);
+      console.log(data.name);
 
       var currentTemp = document.querySelector("#currentTemp");
       var icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
@@ -27,13 +28,14 @@ function getCoordinates(param) {
       currentTemp.innerHTML = `<h2>City: ${data.name}</h2><img src=${icon}></img><div>Tempature: ${data.main.temp}</div><div>Humidty: ${data.main.humidity}</div><div>Wind Speed: ${data.wind.speed} mph</div>`;
 
       fiveDay(data.coord.lon, data.coord.lat);
+      citySave(data.name);
     });
 }
 // 5 day weather, dont forget to style
-function fiveDay(lon, lat) {
+async function fiveDay(lon, lat) {
   var apiFiveDay = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
 
-  fetch(apiFiveDay)
+  await fetch(apiFiveDay)
     .then(function (Response) {
       return Response.json();
     })
@@ -49,23 +51,41 @@ function fiveDay(lon, lat) {
       }
     });
 }
-// THEN I am presented with the city name, the date, an icon representation of weather conditions, the temperature, the humidity, and the wind speed
-// WHEN I view future weather conditions for that city
-// THEN I am presented with a 5-day forecast that displays the date, an icon representation of weather conditions, the temperature, the wind speed, and the humidity
 
-// function getWeather(lat, lon) {
-//   console.log(lat + "" + lon);
+function citySave(city) {
+  cityArray = JSON.parse(localStorage.getItem("searchHistory"));
 
-//   var secondApiUrl = `http://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid=${apiKey}`;
+  if (cityArray.indexOf(city) !== -1) return;
+  cityArray.push(city);
+  console.log(cityArray);
+  localStorage.setItem("searchHistory", JSON.stringify(cityArray));
+  displayCities();
+}
 
-//   fetch(secondApiUrl).then(function (Response) {
-//     return Response.json();
-//   });
+function displayCities() {
+  var historyButton = document.querySelector("#historyButton");
+  console.log(historyButton);
 
-//   // run fetch to get the weather data and display the weather data
-//   // create element, append, textContent, maybe innerhtml
-//   // loop
-// }
+  historyButton.innerHTML = "";
+  for (var i = cityArray.length - 1; i >= 0; i--) {
+    var btn = document.createElement("button");
+    btn.textContent = cityArray[i];
+    historyButton.append(btn);
+  }
+}
+
+function initPage() {
+  localStorage.setItem("searchHistory", JSON.stringify(cityArray));
+  //   cityArray = JSON.parse(localStorage.getItem("searchHistory"));
+  //   cityArray = history;
+}
+
+initPage();
+
+// make searches stay on page
+// make buttons work
+
 submitButton.addEventListener("click", function () {
   getCoordinates(searchCity.value);
+  //   localStorage.setItem("searchCity", JSON.stringify(searchCity));
 });
