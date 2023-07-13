@@ -6,6 +6,8 @@ var submitButton = document.querySelector("#submitButton");
 // api Key
 var apiKey = "f3ff5901402986dd4ec3b605204bfe0c";
 
+displayCities();
+
 async function getCoordinates(param) {
   // template literal allows you to write a string while also passing variable
   // DONT FORGET TO ADD HTTPS WHEN DEPLOYING
@@ -67,25 +69,23 @@ function displayCities() {
   console.log(historyButton);
 
   historyButton.innerHTML = "";
-  for (var i = cityArray.length - 1; i >= 0; i--) {
+  var storedSearchHistory =
+    JSON.parse(localStorage.getItem("searchHistory")) || [];
+  storedSearchHistory.forEach(function (city) {
     var btn = document.createElement("button");
-    btn.textContent = cityArray[i];
+    btn.textContent = city;
     historyButton.append(btn);
-  }
+  });
 }
 
 function initPage() {
+  cityArray = JSON.parse(localStorage.getItem("searchHistory")) || [];
   localStorage.setItem("searchHistory", JSON.stringify(cityArray));
-  //   cityArray = JSON.parse(localStorage.getItem("searchHistory"));
-  //   cityArray = history;
 }
 
 initPage();
 
-// make searches stay on page
-// make buttons work
-
 submitButton.addEventListener("click", function () {
   getCoordinates(searchCity.value);
-  //   localStorage.setItem("searchCity", JSON.stringify(searchCity));
+  localStorage.setItem("searchCity", JSON.stringify(searchCity));
 });
