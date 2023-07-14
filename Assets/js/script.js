@@ -8,11 +8,11 @@ var apiKey = "f3ff5901402986dd4ec3b605204bfe0c";
 
 displayCities();
 
-function getCoordinates(param) {
+async function getCoordinates(param) {
   // template literal allows you to write a string while also passing variable
   // DONT FORGET TO ADD HTTPS WHEN DEPLOYING
   var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${param}&limit=5&appid=${apiKey}&units=imperial`;
-  fetch(apiUrl)
+  await fetch(apiUrl)
     .then(function (Response) {
       // repsponse tells us data on fetch
 
