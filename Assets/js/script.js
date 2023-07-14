@@ -24,7 +24,7 @@ async function getCoordinates(param) {
       var currentTemp = document.querySelector("#currentTemp");
       var icon = `https://openweathermap.org/img/w/${data.weather[0].icon}.png`;
 
-      currentTemp.innerHTML = `<h2>${data.name} <br> Current Forecast:</h2><img src=${icon}></img><div>Tempature: ${data.main.temp}</div><div>Humidty: ${data.main.humidity}</div><div>Wind Speed: ${data.wind.speed} mph</div>`;
+      currentTemp.innerHTML = `<h2>${data.name} <br>Current Forecast:</h2><img src=${icon}></img><div>Tempature: ${data.main.temp}</div><div>Humidty: ${data.main.humidity}</div><div>Wind Speed: ${data.wind.speed} mph</div>`;
 
       fiveDay(data.coord.lon, data.coord.lat);
       citySave(data.name);

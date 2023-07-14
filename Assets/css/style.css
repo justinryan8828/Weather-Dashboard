@@ -1,119 +1,63 @@
-* {
-  margin: 0;
-  /* padding: 25px; */
-  color: antiquewhite;
-  background-color: rgb(71, 71, 244);
-}
-
-.card {
-  display: flex;
-}
-
-#forecast {
-  display: flex;
-  flex-direction: row;
-  border: 25px;
-}
-
-#container {
-  border-radius: 5px;
-}
-/* :root {
+:root {
   --light-blue: #00a0e9;
   --light-grey: #d3d3d3;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  color: #333;
-  margin: 0;
-  padding: 0;
+* {
+  color: black;
+  /* background-color: rgba(71, 71, 244, 0.8); */
 }
 
-.container {
+body {
+}
+.head {
+  padding: 25px;
+  background-color: var(--light-blue);
+}
+.card {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-}
-
-.head {
-  background-color: var(--light-blue);
-  padding: 20px;
   text-align: center;
-  color: #fff;
+  justify-content: center !important;
+  margin: 25px;
+  background-color: var(--light-blue);
 }
-
 #citySearch {
-  font-weight: bold;
-  color: var(--light-blue);
-  margin-top: 20px;
+  padding-left: 25px;
+  padding-bottom: 10px;
 }
 
 #searchContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-#searchCity {
-  padding: 10px;
-  width: 300px;
-}
-
-#submitButton {
-  background-color: var(--light-blue);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
+  padding-left: 25px;
+  padding-bottom: 10px;
 }
 
 #historyButton {
+  padding-left: 25px;
+  padding-bottom: 10px;
   display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-start;
-  margin-top: 20px;
+  justify-content: start;
 }
 
-#historyButton button {
-  margin-bottom: 5px;
-  background-color: var(--light-grey);
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
+#forecast {
+  display: flex;
+  border: 25px;
 }
 
 #container {
-  flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex: start;
+  border-radius: 5px;
 }
 
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  max-width: 800px;
-  padding: 20px;
-}
-
-.card {
+#currentTemp {
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  justify-content: flex-end !important;
   background-color: var(--light-blue);
-  padding: 20px;
-  color: #fff;
-}
-
-.forecast-card {
-  background-color: var(--light-grey);
-  padding: 20px;
-  color: #fff;
 }
 
 .iconClass {
-  height: 25px;
-  width: 25px;
-} */
+  width: 70px;
+}
