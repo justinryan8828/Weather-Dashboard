@@ -1,5 +1,24 @@
-/* Colors */
-:root {
+* {
+  margin: 0;
+  /* padding: 25px; */
+  color: antiquewhite;
+  background-color: rgb(71, 71, 244);
+}
+
+.card {
+  display: flex;
+}
+
+#forecast {
+  display: flex;
+  flex-direction: row;
+  border: 25px;
+}
+
+#container {
+  border-radius: 5px;
+}
+/* :root {
   --light-blue: #00a0e9;
   --light-grey: #d3d3d3;
 }
@@ -8,10 +27,14 @@ body {
   font-family: Arial, sans-serif;
   background-color: #fff;
   color: #333;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
   display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .head {
@@ -27,10 +50,16 @@ body {
   margin-top: 20px;
 }
 
-input[type="text"] {
-  width: 100%;
+#searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+#searchCity {
   padding: 10px;
-  margin-bottom: 10px;
+  width: 300px;
 }
 
 #submitButton {
@@ -49,31 +78,6 @@ input[type="text"] {
 }
 
 #historyButton button {
-  margin-left: 10px;
-}
-
-#currentTemp {
-  padding: 20px;
-  background-color: var(--light-blue);
-  color: #fff;
-}
-
-#forecast {
-  padding: 20px;
-  background-color: var(--light-grey);
-  color: #fff;
-}
-
-#forecast h2 {
-  margin-top: 0;
-}
-
-#forecast img {
-  display: block;
-  margin-bottom: 10px;
-}
-
-button {
   margin-bottom: 5px;
   background-color: var(--light-grey);
   color: #fff;
@@ -82,17 +86,34 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  opacity: 0.8;
+#container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* style icon */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.card {
+  background-color: var(--light-blue);
+  padding: 20px;
+  color: #fff;
+}
+
+.forecast-card {
+  background-color: var(--light-grey);
+  padding: 20px;
+  color: #fff;
+}
+
 .iconClass {
   height: 25px;
   width: 25px;
-}
-/* style card */
-.card {
-  background-color: var(--light-grey);
-}
-/* create flexbos for forecast */
+} */

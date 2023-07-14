@@ -19,19 +19,28 @@
     </header>
     <!-- search and button for search -->
     <div>
-      <div id="citySearch">Search for a City:</div>
-      <input type="" id="searchCity" />
-      <button id="submitButton">Search</button>
+      <div id="citySearch">City Search:</div>
+      <div id="searchContainer">
+        <input type="" id="searchCity" />
+        <button id="submitButton">Search</button>
+      </div>
       <div id="historyButton"></div>
     </div>
     <!-- current weather data -->
     <div id="container">
-      <div>
-        <div id="currentTemp"></div>
-      </div>
-      <!-- 5 day forecast -->
-      <div>
-        <div id="forecast"></div>
+      <div class="card-container">
+        <div>
+          <div id="currentTemp"></div>
+        </div>
+        <!-- 5 day forecast -->
+        <div>
+          <div id="forecast"></div>
+          <div class="forecast-card"></div>
+          <div class="forecast-card"></div>
+          <div class="forecast-card"></div>
+          <div class="forecast-card"></div>
+          <div class="forecast-card"></div>
+        </div>
       </div>
     </div>
 

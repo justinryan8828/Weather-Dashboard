@@ -45,7 +45,9 @@ async function fiveDay(lon, lat) {
       for (var i = 3; i < data.list.length; i += 8) {
         var icon = `https://openweathermap.org/img/w/${data.list[i].weather[0].icon}.png`;
 
-        document.getElementById("forecast").innerHTML += `<div class = "card">
+        document.getElementById(
+          "forecast"
+        ).innerHTML += `<div class = "card col-2">
         <img src=${icon} class = "iconClass"></img>
         <div>Tempature: ${data.list[i].main.temp}</div>
         <div>Humidty: ${data.list[i].main.humidity}</div>
