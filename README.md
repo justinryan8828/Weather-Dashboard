@@ -26,4 +26,4 @@ Our user-friendly interface ensures a seamless experience for users of all level
 
 ## Usage
 
-[Weather Dashboard](https://justinryan8828.github.io/Weather-Dashboard/)
+[Weather Dashboard]()
